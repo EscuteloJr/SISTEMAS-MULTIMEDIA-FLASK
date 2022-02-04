@@ -20,10 +20,12 @@ class AnoLectivo(db.Model):
     __tablename__ = "tb_ano_lectivo"
     
     id = db.column(db.Integer, primary_key=true)
-    descricao = nome = db.column(db.String, nullable=False)
+    descricao = db.column(db.String, nullable=False)
+    estado = db.column(db.Boolean, nullable=False)
     
-    def __init__(self, descricao):
+    def __init__(self, descricao, estado):
         self.descricao = descricao
+        self.estado = estado
         
     def __repr__(self):
         return "<AnoLectivo %r>" % self.descricao
@@ -53,17 +55,19 @@ class Pessoa(db.Model):
     estado_civil_id =  db.column(db.Integer, db.models.ForeignKey('tb_estado_civil.id', on_delete=db.CASCADE))
     bi = db.column(db.String(14), nullable=False)
     data_cadastro = db.column(db.Date, nullable=False)
+    estado = db.column(db.Boolean, nullable=False)
     
     Sexo = db.relationship('Sexo', foreign_key=sexo_id)
     EstadoCivil = db.relationship('EstadoCivil', foreign_key=estado_civil_id)
     
-    def __int__(self, nome, sobrenome, email, sexo_id, bi, data_cadastro):
+    def __int__(self, nome, sobrenome, email, sexo_id, bi, data_cadastro, estado):
         self.nome = nome
         self.sobrenome = sobrenome
         self.email = email
         self.sexo_id = sexo_id
         self.bi = bi
         self.data_cadastro = data_cadastro
+        self.estado = estado
         
     def __repr__(self):
         return "<Pessoa %r>" % self.nome
@@ -109,9 +113,11 @@ class PlanoDeEstudo(db.Model):
     
     id = db.column(db.Integer, primary_key=true)
     descricao = nome = db.column(db.String, nullable=False)
+    estado = db.column(db.Boolean, nullable=False)
     
-    def __init__(self, descricao):
+    def __init__(self, descricao, estado):
         self.descricao = descricao
+        self.estado = estado
         
     def __repr__(self):
         return "<PlanoDeEstudo %r>" % self.descricao
@@ -153,11 +159,13 @@ class Classe(db.Model):
     id = db.column(db.Integer, primary_key=true) 
     descricao = nome = db.column(db.String, nullable=False)
     plano_estudo_id = db.column(db.Integer, db.models.ForeignKey('tb_plano_estudo.id', on_delete=db.CASCADE))
+    estado = db.column(db.Boolean, nullable=False)
         
     PlanoDeEstudo = db.relationship('PlanoDeEstudo', foreign_key=plano_estudo_id)
     
-    def __init__(self, plano_estudo_id):
+    def __init__(self, plano_estudo_id, estado):
         self.plano_estudo_id = plano_estudo_id
+        self.estado = estado
         
     def __repr__(self):
         return "<Classe %r>" % self.descricao   
@@ -169,13 +177,15 @@ class Turma(db.Model):
     descricao = nome = db.column(db.String, nullable=False)
     classe_id = db.column(db.Integer, db.models.ForeignKey('tb_classe.id', on_delete=db.CASCADE))
     ano_ectivo_id = db.column(db.Integer, db.models.ForeignKey('tb_ano_lectivo.id', on_delete=db.CASCADE))
-        
+    estado = db.column(db.Boolean, nullable=False)
+         
     Classe = db.relationship('Classe', foreign_key=classe_id)
     AnoLectivo = db.relationship('AnoLectivo', foreign_key=ano_ectivo_id)
     
-    def __init__(self, classe_id, ano_ectivo_id):
+    def __init__(self, classe_id, ano_ectivo_id, estado):
         self.classe_id = classe_id
         self.ano_ectivo_id = ano_ectivo_id
+        self.estado = estado
         
     def __repr__(self):
         return "<Turma %r>" % self.descricao  
@@ -189,15 +199,17 @@ class Matricula(db.Model):
     encarregado_id = db.column(db.Integer, db.models.ForeignKey('tb_encarregado.id', on_delete=db.CASCADE))
     crianca_id = db.column(db.Integer, db.models.ForeignKey('tb_crianca.id', on_delete=db.CASCADE))
     data_matricula = db.column(db.Date, nullable=False)
+    estado = db.column(db.Boolean, nullable=False)
         
     Pessoa = db.relationship('Pessoa', foreign_key=encarregado_id)
     Crianca = db.relationship('Crianca', foreign_key=crianca_id)
     
-    def __init__(self, turma_id, encarregado_id, crianca_id, data_matricula):
+    def __init__(self, turma_id, encarregado_id, crianca_id, data_matricula, estado):
         self.turma_id = turma_id
         self.encarregado_id = encarregado_id
         self.crianca_id = crianca_id
         self.data_matricula = data_matricula
+        self.estado = estado
         
     def __repr__(self):
         return "<Matricula %r>" % self.id    
