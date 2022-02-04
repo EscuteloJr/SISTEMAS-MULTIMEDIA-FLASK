@@ -228,5 +228,5 @@ class ConfirmacaoMatricula(db.Model):
         self.data_confirmacao = data_confirmacao
         
     def __repr__(self):
-        return "<ConfirmacaoMatricula %r>" % self.id    
+        return "<ConfirmacaoMatricula %r>" % self.id
     
