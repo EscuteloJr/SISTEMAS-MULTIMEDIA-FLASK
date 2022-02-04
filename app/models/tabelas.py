@@ -14,6 +14,20 @@ class EstadoCivil(db.Model):
         
     def __repr__(self):
         return "<EstadoCivil %r>" % self.descricao
+    
+    
+class AnoLectivo(db.Model):
+    __tablename__ = "tb_ano_lectivo"
+    
+    id = db.column(db.Integer, primary_key=true)
+    descricao = nome = db.column(db.String, nullable=False)
+    
+    def __init__(self, descricao):
+        self.descricao = descricao
+        
+    def __repr__(self):
+        return "<AnoLectivo %r>" % self.descricao
+        
 
 class Sexo(db.Model):
     __tablename__ = "tb_sexo"
@@ -128,16 +142,48 @@ class PlanoMaterial(db.Model):
         return "<PlanoMaterial %r>" % self.id    
     
 
-class Crianca(db.Model):
-    ___tablename__ = "tb_crianca"
+class Classe(db.Model):
+    ___tablename__ = "tb_classe"
     id = db.column(db.Integer, primary_key=true) 
-    encarregado_id = db.column(db.Integer, db.models.ForeignKey('tb_encarregado.id', on_delete=db.CASCADE))
+    descricao = nome = db.column(db.String, nullable=False)
+    plano_estudo_id = db.column(db.Integer, db.models.ForeignKey('tb_plano_estudo.id', on_delete=db.CASCADE))
         
-    Pessoa = db.relationship('Pessoa', foreign_key=encarregado_id)
+    PlanoDeEstudo = db.relationship('PlanoDeEstudo', foreign_key=plano_estudo_id)
     
-    def __init__(self, encarregado_id):
-        self.encarregado_id = encarregado_id
+    def __init__(self, plano_estudo_id):
+        self.plano_estudo_id = plano_estudo_id
         
     def __repr__(self):
-        return "<Crianca %r>" % self.id    
+        return "<Classe %r>" % self.descricao   
+    
+    
+class Turma(db.Model):
+    ___tablename__ = "tb_turma"
+    id = db.column(db.Integer, primary_key=true) 
+    descricao = nome = db.column(db.String, nullable=False)
+    classe_id = db.column(db.Integer, db.models.ForeignKey('tb_classe.id', on_delete=db.CASCADE))
+    ano_ectivo_id = db.column(db.Integer, db.models.ForeignKey('tb_ano_lectivo.id', on_delete=db.CASCADE))
+        
+    Classe = db.relationship('Classe', foreign_key=classe_id)
+    AnoLectivo = db.relationship('AnoLectivo', foreign_key=ano_ectivo_id)
+    
+    def __init__(self, classe_id, ano_ectivo_id):
+        self.classe_id = classe_id
+        self.ano_ectivo_id = ano_ectivo_id
+        
+    def __repr__(self):
+        return "<Turma %r>" % self.descricao  
+    
+    
+class Matricula(db.Model):
+    __tablename__ = "tb_matricula"
+    
+    id = db.column(db.Integer, primary_key=true)
+    turma_id = db.column(db.Integer, db.models.ForeignKey('tb_turma.id', on_delete=db.CASCADE))
+    
+    def __init__(self, turma_id):
+        self.turma_id = turma_id
+        
+    def __repr__(self):
+        return "<Matricula %r>" % self.id    
     
