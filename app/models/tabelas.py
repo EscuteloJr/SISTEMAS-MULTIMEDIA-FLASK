@@ -82,5 +82,62 @@ class Crianca(db.Model):
         
     def __repr__(self):
         return "<Crianca %r>" % self.id
+
+
+class PlanoDeEstudo(db.Model):
+    __tablename__ = "tb_plano_estudo"
     
+    id = db.column(db.Integer, primary_key=true)
+    descricao = nome = db.column(db.String, nullable=False)
+    
+    def __init__(self, descricao):
+        self.descricao = descricao
+        
+    def __repr__(self):
+        return "<PlanoDeEstudo %r>" % self.descricao
+    
+    
+class Material(db.Model):
+    __tablename__ = "tb_material"
+    
+    id = db.column(db.Integer, primary_key=true)
+    descricao = nome = db.column(db.String, nullable=False)
+    
+    def __init__(self, descricao):
+        self.descricao = descricao
+        
+    def __repr__(self):
+        return "<Material %r>" % self.descricao
+    
+    
+class PlanoMaterial(db.Model):
+    __tablename__ = "tb_plano_material"
+    
+    id = db.column(db.Integer, primary_key=true)
+    plano_id =  db.column(db.Integer, db.models.ForeignKey('tb_plano_estudo.id', on_delete=db.CASCADE))
+    material_id =  db.column(db.Integer, db.models.ForeignKey('tb_material.id', on_delete=db.CASCADE))
+    
+    PlanoDeEstudo = db.relationship('PlanoDeEstudo', foreign_key=plano_id)
+    Material = db.relationship('Material', foreign_key=material_id)
+    
+    def __init__(self, plano_id, material_id):
+        self.plano_id = plano_id
+        self.material_id = material_id
+        
+    def __repr__(self):
+        return "<PlanoMaterial %r>" % self.id    
+    
+
+class Crianca(db.Model):
+    ___tablename__ = "tb_crianca"
+    id = db.column(db.Integer, primary_key=true) 
+    encarregado_id = db.column(db.Integer, db.models.ForeignKey('tb_encarregado.id', on_delete=db.CASCADE))
+        
+    Pessoa = db.relationship('Pessoa', foreign_key=encarregado_id)
+    
+    def __init__(self, encarregado_id):
+        self.encarregado_id = encarregado_id
+        
+    def __repr__(self):
+        return "<Crianca %r>" % self.id    
     
