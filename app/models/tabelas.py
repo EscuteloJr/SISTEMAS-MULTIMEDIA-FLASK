@@ -52,16 +52,18 @@ class Pessoa(db.Model):
     sexo_id =  db.column(db.Integer, db.models.ForeignKey('tb_sexo.id', on_delete=db.CASCADE))
     estado_civil_id =  db.column(db.Integer, db.models.ForeignKey('tb_estado_civil.id', on_delete=db.CASCADE))
     bi = db.column(db.String(14), nullable=False)
+    data_cadastro = db.column(db.Date, nullable=False)
     
     Sexo = db.relationship('Sexo', foreign_key=sexo_id)
     EstadoCivil = db.relationship('EstadoCivil', foreign_key=estado_civil_id)
     
-    def __int__(self, nome, sobrenome, email, sexo_id, bi):
+    def __int__(self, nome, sobrenome, email, sexo_id, bi, data_cadastro):
         self.nome = nome
         self.sobrenome = sobrenome
         self.email = email
         self.sexo_id = sexo_id
         self.bi = bi
+        self.data_cadastro = data_cadastro
         
     def __repr__(self):
         return "<Pessoa %r>" % self.nome
@@ -73,12 +75,14 @@ class Encarregado(db.Model):
     id = db.column(db.Integer, primary_key=true)
     qtdCriancas = db.column(db.Integer, nullable=False)
     pessoa_id = db.column(db.Integer, db.models.ForeignKey('tb_pessoa.id', on_delete=db.CASCADE))
+    data_cadastro = db.column(db.Date, nullable=False)
     
     Pessoa = db.relationship('Pessoa', foreign_key=pessoa_id)
     
-    def __init__(self, qtdCriancas, pessoa_id):
+    def __init__(self, qtdCriancas, pessoa_id, data_cadastro):
         self.qtdCriancas = qtdCriancas
         self.pessoa_id = pessoa_id
+        self.data_cadastro = data_cadastro
         
     def __repr__(self):
         return "<Encarregado %r>" % self.id
@@ -88,11 +92,13 @@ class Crianca(db.Model):
     ___tablename__ = "tb_crianca"
     id = db.column(db.Integer, primary_key=true) 
     encarregado_id = db.column(db.Integer, db.models.ForeignKey('tb_encarregado.id', on_delete=db.CASCADE))
+    data_cadastro = db.column(db.Date, nullable=False) 
         
     Pessoa = db.relationship('Pessoa', foreign_key=encarregado_id)
     
-    def __init__(self, encarregado_id):
+    def __init__(self, encarregado_id, data_cadastro):
         self.encarregado_id = encarregado_id
+        self.data_cadastro = data_cadastro
         
     def __repr__(self):
         return "<Crianca %r>" % self.id
@@ -180,10 +186,35 @@ class Matricula(db.Model):
     
     id = db.column(db.Integer, primary_key=true)
     turma_id = db.column(db.Integer, db.models.ForeignKey('tb_turma.id', on_delete=db.CASCADE))
+    encarregado_id = db.column(db.Integer, db.models.ForeignKey('tb_encarregado.id', on_delete=db.CASCADE))
+    crianca_id = db.column(db.Integer, db.models.ForeignKey('tb_crianca.id', on_delete=db.CASCADE))
+    data_matricula = db.column(db.Date, nullable=False)
+        
+    Pessoa = db.relationship('Pessoa', foreign_key=encarregado_id)
+    Crianca = db.relationship('Crianca', foreign_key=crianca_id)
     
-    def __init__(self, turma_id):
+    def __init__(self, turma_id, encarregado_id, crianca_id, data_matricula):
         self.turma_id = turma_id
+        self.encarregado_id = encarregado_id
+        self.crianca_id = crianca_id
+        self.data_matricula = data_matricula
         
     def __repr__(self):
         return "<Matricula %r>" % self.id    
+    
+    
+class ConfirmacaoMatricula(db.Model):
+    ___tablename__ = "tb_confirmacao_matricula"
+    id = db.column(db.Integer, primary_key=true) 
+    matricula_id = db.column(db.Integer, db.models.ForeignKey('tb_matricula.id', on_delete=db.CASCADE))
+    data_confirmacao = db.column(db.Date, nullable=False) 
+        
+    Pessoa = db.relationship('Matricula', foreign_key=matricula_id)
+    
+    def __init__(self, matricula_id, data_confirmacao):
+        self.matricula_id = matricula_id
+        self.data_confirmacao = data_confirmacao
+        
+    def __repr__(self):
+        return "<ConfirmacaoMatricula %r>" % self.id    
     
