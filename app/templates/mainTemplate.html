@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename="css/principal.css") }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename="css/footer.css") }}" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="menuHeader">
+        <nav class="menu"> 
+            
+            <div class="logoMarca">
+                <a href="#">
+                    <h2 class="logo">Sorrizos</h2>                   
+                </a>
+               
+            </div>     
+            <ul>
+                <li><a href="#">Início</a></li>
+                <li><a href="/galeria">Galeria</a></li>
+                <li><a href="/sobrenos">Sobre Nós</a></li>  
+                <li><a href="/contacto">Contacto</a></li>                            
+            </ul>
+        </nav> 
+
+        <div class="pesquisar">
+            <input type="search" class="pesquisarInput" placeholder="Pesquisar">
+            <a href="#"><button class="btnBuscar">Buscar</button></a>
+        </div>
+
+        <div class="tema">
+            <h1>Centro Infantil <br><span>Sorrizos</span><br></h1>
+            <p class="paragrafoPrincipal">
+                Toda a criança merece um ambiente que a faça sentir integrada, merece ser compreendida... <br>
+                Nós fazemos isso!!! deixanos o seu filho com "sorrizo" todos os dias.
+            </p>
+            <button class="btnInscrever"><a id="btnPrincipal" href="#">Fazer Inscrição</a></button>
+        </div>
+   </header>
+
+
+   <div >
+   {% block body %}
+   {% endblock %}
+   </div>
+
+
+   <footer>
+    <div class="footer-content">
+        <h3>Centro Infantil Sorrizos</h3>
+        <p>Siga-nos nas redes sociais e receba diariamente as novidades!</p>
+        <ul class="socials">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <p>copyright &copy; UCAN 2021 Sorrizos. Feito Por <span>Mateus Escutelo</span></p>
+    </div>
+</footer>
+
+</body>
+</html>

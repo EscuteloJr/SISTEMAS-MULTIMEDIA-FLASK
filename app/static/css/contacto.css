@@ -1,0 +1,177 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.menuOutrasPaginas{
+    width: auto;
+    background-position: center;
+    color: darkgrey;
+}
+
+.menuOutrasPaginas ul a{
+    color: darkgrey;
+}
+
+
+
+.logoMarca{
+    width: 200px;
+    float: left;
+    height: 70px;
+
+}
+
+.logo{
+    color: darkorange;
+    font-size: 35px;
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+}
+
+.menu{
+    width: 100%;
+    float: left;
+    height: 70px;
+    margin: auto;
+}
+
+.menu ul{
+    display: flex;
+    float: left;
+    text-transform: uppercase;
+    justify-content: center;
+
+
+}
+
+.menu li{
+    list-style: none;
+    margin-left: 62px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+.menu a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+
+}
+
+.menu a:hover{
+    color: darkorange;
+}
+
+
+
+
+body{
+    background: white;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+}
+section{
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+}
+section h2{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 12vw;
+    font-weight: 900;
+    -webkit-text-stroke: 1px darkorange;
+    color: transparent;
+    opacity: .2;
+    user-select: none;
+    z-index: -1;
+}
+.container{
+    width: 100%;
+    max-width: 1160px;
+    padding: 30px;
+    margin: 0 auto;
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 2.5rem;
+    align-items: center;
+}
+.content h1{
+    font-size: 2.8rem;
+}
+.content p{
+    color: darkorange;
+    line-height: 1.6;
+    margin: 3rem 0;
+}
+.content .social a{
+    text-decoration: none;
+    color:  black;
+    margin-right: 1rem;
+    transition: color .3s ease;
+    font-size: 1.3rem;
+}
+.content .social a:hover{
+    color: darkorange;
+}
+
+input,textarea{
+
+    width: 100%;
+    color: darkgrey;
+    font-family: "Barlow" ,Open Sans;
+    font-size: 17px;
+    padding: .75rem;
+    outline: none;
+    border: none;
+    border-bottom: 0.5px solid darkorange;
+    margin: .6rem 0;
+    border-radius: 2px;
+    box-sizing: border-box;
+    background: transparent;
+    resize: vertical;
+    transition: border .3s ease;
+}
+input:focus,textarea:focus{
+    border-bottom-color: darkgrey;
+}
+
+.form .flex{
+    display: flex;
+    justify-content: space-between;
+}
+.flex>*{
+    flex-basis: 49%;
+}
+::placeholder{
+    color:  darkgrey;
+    font-weight: 400;
+}
+
+.form button{
+    width: 150px;
+    padding: .75rem 0;
+    border: none;
+    outline: none;
+    background: darkorange;
+    color: #fff;
+    font-size: 18px;
+    transition: opacity .3s ease;
+}
+.form button:hover{
+    opacity: .7;
+}
+
+@media (max-width:700px){
+    .grid{
+        grid-template-columns: 1fr;
+    }
+}

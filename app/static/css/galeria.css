@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Baloo Bhaijaan 2', cursive;
+}
+
+
+.menuOutrasPaginas{
+    width: auto;
+    background-position: center;
+    color: darkgrey;
+}
+
+.menuOutrasPaginas ul a{
+    color: darkgrey;
+}
+
+
+
+.logoMarca{
+    width: 200px;
+    float: left;
+    height: 70px;
+
+}
+
+.logo{
+    color: darkorange;
+    font-size: 35px;
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+}
+
+.menu{
+    width: 100%;
+    float: left;
+    height: 70px;
+    margin: auto;
+}
+
+.menu ul{
+    display: flex;
+    float: left;
+    text-transform: uppercase;
+    justify-content: center;
+
+
+}
+
+.menu li{
+    list-style: none;
+    margin-left: 62px;
+    margin-top: 27px;
+    font-size: 14px;
+}
+
+.menu a{
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.4s ease-in-out;
+
+}
+
+.menu a:hover{
+    color: darkorange;
+}
+
+.container{
+    width: 100%;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1{
+    font-size: 2.6rem;
+    text-align: center;
+    padding: 5rem 0;
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 0;
+}
+.grid .item{
+    overflow: hidden;
+}
+.grid .item img{
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    transition: .6s ease;
+}
+@media (max-width:768px){
+    .grid{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media (max-width:540px){
+    .grid{
+        grid-template-columns: 1fr;
+    }
+}

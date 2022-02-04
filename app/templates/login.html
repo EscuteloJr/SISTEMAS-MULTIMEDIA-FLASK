@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{{ url_for('static', filename="css/login.css") }}" rel="stylesheet" />
+</head>
+<body>
+    <section>
+        <div class="form-container">
+            <h1>Bem vindo ao Sorrizos</h1>
+        <form action="index.html">
+            <div class="control">
+            <label for="name">Nome ou E-mail</label>
+            <input type="text" id="name" >
+            </div>
+            <div class="control">
+            <label for="psw">Senha</label>
+            <input type="password" id="psw" >
+            </div>
+            <span><input type="checkbox"> Guardar meus dados de acesso</span>
+            <div class="control">
+            <input type="submit" class="btn" value="Entrar">
+            </div>
+        </form>
+        <p><a href="./recuperarSenha.html">Esqueceu a senha?</a></p>
+        </div>
+    </section>
+
+    <script>
+		function validacao(){
+			var usuario = document.getElementById('name').value;
+			var password = document.getElementById('psw').value;
+			if(usuario == "admin" && password == "admin"){
+				window.location = "./index.html";
+			}else{
+				window.alert("Nome e Senha Incorrectos : " + usuario + "   " + password);
+			}
+		}
+	</script>
+</body>
+</html>
