@@ -13,5 +13,6 @@ manager.add_command('db', MigrateCommand)
 
 app.secret_key = "root_123"
 
+from app.models import tabelas
 from app.controllers import default
 
